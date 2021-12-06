@@ -7,3 +7,7 @@
 - [MongoDB](https://www.mongodb.com/es)
 - [MongoDB Compass](https://www.mongodb.com/products/compass)(Para ver resultados de manera comoda `opcional`)
 - [Postman](https://www.postman.com/) (Para realizar peticiones a las API `opcional`)
+- [NodeJS](https://nodejs.org/es/) **La actual**
+
+## Instrucciones
+Hmmm:/ no se como vaya a estar todo este rollo porque no subio nada de venv ni eso
