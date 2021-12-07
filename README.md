@@ -7,7 +7,7 @@
 - [MongoDB](https://www.mongodb.com/es)
 - [MongoDB Compass](https://www.mongodb.com/products/compass)(Para ver resultados de manera comoda `opcional`)
 - [Postman](https://www.postman.com/) (Para realizar peticiones a las API `opcional`)
-- [NodeJS](https://nodejs.org/es/) **La actual**
+- [NodeJS](https://nodejs.org/es/) **LTS**
 
 ## Instrucciones
 ## Haz esto si ya instalaste todo
@@ -35,4 +35,4 @@ Al momento de nosotros hacer eso a lado izquierdo de la ruta nos debe aparecer (
 - Abriremos otra consola
 Escribiremos `mongo`
 
-**En dado caso que aparezca que no se reconoce el comando ver el [siguiente video](https://youtu.be/2vjeCOiLc5g)**
+**En dado caso que aparezca que no se reconoce el comando ver el [siguiente video](https://youtu.be/2vjeCOiLc5g)** (Cerrar consola, abrir una nueva y escribir ``)
