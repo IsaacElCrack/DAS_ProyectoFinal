@@ -151,7 +151,9 @@ export const Users = () => {
                 <td><img src={user.foto} width="100px" height="100px"/></td>
                 <td>{user.nombre}</td>
                 <td>{user.correo}</td>
-                <td>{user.mascotas}</td>
+                <td text-center><button>
+                  <img src="https://icon-library.com/images/drop-down-arrow-icon/drop-down-arrow-icon-4.jpg" width="20px" height="20px"/>
+                  </button></td>
                 <td>
                   <button
                     className="btn btn-secondary btn-m btn-block"

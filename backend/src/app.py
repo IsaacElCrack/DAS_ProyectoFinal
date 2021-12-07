@@ -9,14 +9,13 @@ mongo = PyMongo(app)
 CORS(app)
 db = mongo.db.users
 
-
 @app.route('/users', methods=['POST'])
 def createUser():
     id = db.insert({
         'nombre': request.json['nombre'],
         'correo': request.json['correo'],
         'foto': request.json['foto'],
-        'mascotas': request.json["mascotas"]
+        'xd': request.json["mascotas"]
     })
     return jsonify(str(ObjectId(id)))
 
