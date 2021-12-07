@@ -22,7 +22,7 @@ virtualenv venv
 ```
 - Al momento de nosotros ejecutar el comando nos creara varias carpetas en el directorio
 
-!['Holi'](Screenshots/Screen2.png)
+!['Holi'](Screen2.png)
 
 - Es momento de abrir otra consola nos dirigimos a la carpeta .\venv\Scripts mediante cmd (cd .\venv\Scripts), luego de esto introduciremos 
 ```
@@ -30,7 +30,7 @@ virtualenv venv
 ```
 Al momento de nosotros hacer eso a lado izquierdo de la ruta nos debe aparecer (venv) como se ve en la imagen
 
-!['Holi'](Screenshots/Screen1.png)
+!['Holi'](Screen1.png)
 
 - Abriremos otra consola
 Escribiremos `mongo`
