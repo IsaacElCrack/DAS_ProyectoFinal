@@ -13,9 +13,10 @@ db = mongo.db.users
 @app.route('/users', methods=['POST'])
 def createUser():
     id = db.insert({
-        "name": request.json['name'],
-        "email": request.json['email'],
-        "password": request.json['password']
+        'nombre': request.json['nombre'],
+        'correo': request.json['correo'],
+        'foto': request.json['foto'],
+        'mascotas': request.json["mascotas"]
     })
     return jsonify(str(ObjectId(id)))
 
@@ -24,11 +25,13 @@ def createUser():
 def getUsers():
     users = []
     for doc in db.find():
+        print(doc)
         users.append({
             '_id': str(ObjectId(doc['_id'])),
-            'name': doc['name'],
-            'email': doc['email'],
-            'password': doc['password']
+            'nombre': doc['nombre'],
+            'correo': doc['correo'],
+            'foto': doc['foto'],
+            'mascotas': doc["mascotas"]
         })
     return jsonify(users)
 
@@ -39,9 +42,10 @@ def getUser(id):
     print(user)
     return jsonify({
         '_id': str(ObjectId(user['_id'])),
-        'name': user['name'],
-        'email': user['email'],
-        'password': user['password']
+        'nombre': user['nombre'],
+        'correo': user['correo'],
+        'foto': user['foto'],
+        "mascotas":user["mascotas"]
     })
 
 
@@ -57,9 +61,10 @@ def updateUser(id):
     print(request.json)
     db.update_one({'_id': ObjectId(id)}, {
         '$set': {
-            "email": request.json['email'],
-            "name": request.json['name'],
-            "password": request.json['password']
+            "nombre": request.json['nombre'],
+            "correo": request.json['correo'],
+            "foto": request.json['foto'],
+            "mascotas":request.json["mascotas"]
         }
     })
     return "Actualizado"
