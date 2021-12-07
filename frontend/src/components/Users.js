@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 const API = process.env.REACT_APP_API;
+const ducksAPI = process.env.REACT_APP_DUCK;
 
 export const Users = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-
+  const [nombre, setnombre] = useState("");
+  const [correo, setcorreo] = useState("");
+  const [foto, setfoto] = useState("");
+  const [mascotas, setMascotas] = useState("");
   const [editing, setEditing] = useState(false);
   const [id, setId] = useState("");
-
   const [users, setUsers] = useState([]);
 
   const handleSubmit = async (e) => {
@@ -18,7 +18,12 @@ export const Users = () => {
       const res = await fetch(`${API}/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: name, email: email, password: pass }),
+        body: JSON.stringify({
+          nombre: nombre,
+          correo: correo,
+          foto: foto,
+          mascotas: mascotas,
+        }),
       });
       const data = await res.json();
       console.log(data);
@@ -26,7 +31,12 @@ export const Users = () => {
       await fetch(`${API}/users/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: name, email: email, password: pass }),
+        body: JSON.stringify({
+          nombre: nombre,
+          correo: correo,
+          foto: foto,
+          mascotas: mascotas,
+        }),
       });
 
       setEditing(false);
@@ -35,9 +45,10 @@ export const Users = () => {
 
     await getUsers();
 
-    setEmail("");
-    setName("");
-    setPass("");
+    setcorreo("");
+    setnombre("");
+    setfoto("");
+    setMascotas("");
   };
 
   const getUsers = async () => {
@@ -67,73 +78,89 @@ export const Users = () => {
     setEditing(true);
     setId(data._id);
 
-    setName(data.name);
-    setPass(data.password);
-    setEmail(data.email);
+    setnombre(data.nombre);
+    setfoto(data.foto);
+    setcorreo(data.correo);
+    setMascotas(data.mascotas);
   };
 
   return (
-    <div className="row">
+    <div className="row align-items-center">
       <div className="col-md-4">
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
+          <div class="form-group">
             <input
               type="text"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
+              class="form-control"
+              onChange={(e) => setnombre(e.target.value)}
+              value={nombre}
               className="form-control"
               placeholder="name"
               autoFocus
             />
           </div>
-          <div className="form-group">
+          <div class="form-group text-center">
             <input
               type="text"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
+              class="form-control"
+              onChange={(e) => setcorreo(e.target.value)}
+              value={correo}
               className="form-control"
-              placeholder="email"
+              placeholder="correo"
             />
           </div>
-          <div className="form-group">
+          <div class="form-group text-center">
             <input
-              type="password"
-              onChange={(e) => setPass(e.target.value)}
-              value={pass}
+              type="text"
+              class="form-control"
+              onChange={(e) => setfoto(e.target.value)}
+              value={foto}
               className="form-control"
-              placeholder="Password"
+              placeholder="Fotografia"
             />
           </div>
-          <button className="btn btn-primary btn-block">
+          <div class="form-group text-center">
+            <input
+              type="text"
+              class="form-control"
+              onChange={(e) => setMascotas(e.target.value)}
+              value={mascotas}
+              className="form-control"
+              placeholder="Mascotas"
+            />
+          </div>
+          <button className="btn btn-primary btn-block form-control">
             {editing ? "Update" : "Create"}
           </button>
         </form>
       </div>
-      <div className="col-md-6">
+      <div className="col-md-8">
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>email</th>
-              <th>password</th>
-              <th>creations</th>
+              <th>Fotografia</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Animales</th>
+              <th>Funciones</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr key={user._id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.password}</td>
+                <td><img src={user.foto} width="100px" height="100px"/></td>
+                <td>{user.nombre}</td>
+                <td>{user.correo}</td>
+                <td>{user.mascotas}</td>
                 <td>
                   <button
-                    className="btn btn-secondary btn-sm btn-block"
+                    className="btn btn-secondary btn-m btn-block"
                     onClick={(e) => editUser(user._id)}
                   >
                     Edit
                   </button>
                   <button
-                    className="btn btn-danger btn-sm btn-block"
+                    className="btn btn-danger btn-m btn-block"
                     onClick={(e) => deleteUser(user._id)}
                   >
                     Delete
