@@ -55,7 +55,13 @@ Dentro de esa carpeta nos dejara una carpeta `\src`, la vamos a eliminar
 
 Ahora es cuando los archivos que guardamos temporalmente los arrastramos a la carpeta `\frontend`
 
-Ahora nos movemos a la carpeta \frontend (`cd .\frontend\`) y utilizamos 
+Ahora nos movemos a la carpeta \frontend (`cd .\frontend\`) 
+
+y utilizamos 
+```
+npm i react-router-dom bootswatch
+```
+y luego:
 ```
 npm start
 ```

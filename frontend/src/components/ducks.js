@@ -1,40 +1,40 @@
 import React, { useState, useEffect } from "react";
 const API = process.env.REACT_APP_API;
 
-export const Users = () => {
+export const Ducks = () => {
   const [nombre, setnombre] = useState("");
-  const [correo, setcorreo] = useState("");
-  const [foto, setfoto] = useState("");
-  const [mascotas, setMascotas] = useState("");
+  const [dueño, setDueño] = useState("");
+  const [año, setAño] = useState("");
+  const [foto, setFoto] = useState("");
   const [editing, setEditing] = useState(false);
   const [id, setId] = useState("");
-  const [users, setUsers] = useState([]);
+  const [ducks, setDucks] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!editing) {
-      const res = await fetch(`${API}/users`, {
+      const res = await fetch(`${API}/ducks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nombre: nombre,
-          correo: correo,
+          dueño: dueño,
+          año: año,
           foto: foto,
-          mascotas: mascotas,
         }),
       });
       const data = await res.json();
       console.log(data);
     } else {
-      await fetch(`${API}/users/${id}`, {
+      await fetch(`${API}/ducks/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nombre: nombre,
-          correo: correo,
+          dueño: dueño,
+          año: año,
           foto: foto,
-          mascotas: mascotas,
         }),
       });
 
@@ -42,61 +42,59 @@ export const Users = () => {
       setId("");
     }
 
-    await getUsers();
+    await getDucks();
     await getFoto();
 
-    setcorreo("");
+    setDueño("");
     setnombre("");
-    setfoto("");
-    setMascotas("");
+    setFoto("");
+    setAño("");
   };
 
-  const getUsers = async () => {
-    const res = await fetch(`${API}/users`);
+  const getDucks = async () => {
+    const res = await fetch(`${API}/ducks`);
     const data = await res.json();
-    setUsers(data);
+    setDucks(data);
   };
 
   const getFoto = async () => {
-    const res = await fetch(`${API}/face`);
+    const res = await fetch(`${API}/duckImg`);
     const data = await res.json();
-    setfoto(data);
+    setFoto(data);
   };
 
-  
-
   useEffect(() => {
-    getUsers();
+    getDucks();
     getFoto();
   }, []);
 
-  const deleteUser = async (id) => {
-    const userResponse = window.confirm("¿Eliminar este dato?");
-    if (userResponse) {
-      await fetch(`${API}/users/${id}`, {
+  const deleteDuck = async (id) => {
+    const DuckResponse = window.confirm("¿Eliminar este dato?");
+    if (DuckResponse) {
+      await fetch(`${API}/ducks/${id}`, {
         method: "DELETE",
       });
-      await getUsers();
+      await getDucks();
       await getFoto();
     }
   };
 
-  const editUser = async (id) => {
-    const res = await fetch(`${API}/user/${id}`);
+  const editDuck = async (id) => {
+    const res = await fetch(`${API}/duck/${id}`);
     const data = await res.json();
 
     setEditing(true);
     setId(data._id);
 
     setnombre(data.nombre);
-    setfoto(data.foto);
-    setcorreo(data.correo);
-    setMascotas(data.mascotas);
+    setFoto(data.foto);
+    setAño(data.año);
+    setDueño(data.dueño);
   };
 
   return (
     <div className="row">
-      <div className="col-md-4">
+      <div className="col-md-12">
         <img width="200px" height="200px" alt="" src={foto} />
         <form onSubmit={handleSubmit} className="card card-body">
           <div class="form-group">
@@ -114,20 +112,20 @@ export const Users = () => {
             <input
               type="text"
               class="form-control"
-              onChange={(e) => setcorreo(e.target.value)}
-              value={correo}
+              onChange={(e) => setDueño(e.target.value)}
+              value={dueño}
               className="form-control"
-              placeholder="correo"
+              placeholder="Dueño"
             />
           </div>
           <div class="form-group">
             <input
               type="text"
               class="form-control"
-              onChange={(e) => setMascotas(e.target.value)}
-              value={mascotas}
+              onChange={(e) => setAño(e.target.value)}
+              value={año}
               className="form-control"
-              placeholder="Mascotas"
+              placeholder="Año"
             />
           </div>
           <button className="btn btn-primary btn-block form-control">
@@ -135,45 +133,38 @@ export const Users = () => {
           </button>
         </form>
       </div>
-      <div className="col-md-8">
+      <div className="col-md-16">
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>Fotografia</th>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Animales</th>
-              <th>Funciones</th>
+              <th className="text-center">Fotografia</th>
+              <th className="text-center">Nombre</th>
+              <th className="text-center">Dueño</th>
+              <th className="text-center">Año</th>
+              <th className="text-center">Funciones</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>
-                  <img src={user.foto} width="100px" height="100px" alt="" />
-                </td>
-                <td>{user.nombre}</td>
-                <td>{user.correo}</td>
+            {ducks.map((duck) => (
+              <tr key={duck._id}>
                 <td className="text-center">
-                  <button>
-                    <img
-                      src="https://icon-library.com/images/drop-down-arrow-icon/drop-down-arrow-icon-4.jpg"
-                      width="20px"
-                      height="20px"
-                      alt=""
-                    />
-                  </button>
+                  <img src={duck.foto} width="100px" height="100px" alt="" />
                 </td>
-                <td>
+                <td className="text-center">{duck.nombre}</td>
+                <td className="text-center">{duck.dueño}</td>
+                <td className="text-center">
+                {duck.año}
+                </td>
+                <td className="text-center">
                   <button
                     className="btn btn-secondary btn-m btn-block"
-                    onClick={(e) => editUser(user._id)}
+                    onClick={(e) => editDuck(duck._id)}
                   >
                     Edit
                   </button>
                   <button
                     className="btn btn-danger btn-m btn-block"
-                    onClick={(e) => deleteUser(user._id)}
+                    onClick={(e) => deleteDuck(duck._id)}
                   >
                     Delete
                   </button>
